@@ -35,7 +35,7 @@ public abstract class Vector {
 		out.append(' ');
 		out.append('(');
 		for (int i = 0; i < size; i ++) {
-			out.append(get(i));
+			out.append(String.format("%02.2f", get(i)));
 			if (i < size - 1) {
 				out.append(',');
 				out.append(' ');

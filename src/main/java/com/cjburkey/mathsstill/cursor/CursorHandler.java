@@ -17,6 +17,10 @@ public class CursorHandler {
 		}
 	}
 	
+	public Cursor getCurrentCursor() {
+		return currentCursor;
+	}
+	
 	public void render() {
 		if (currentCursor != null) {
 			RenderHandler.getCanvas().setCursor(currentCursor);

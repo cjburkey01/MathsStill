@@ -10,6 +10,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public class GraphingHandler {
 	
@@ -17,7 +18,10 @@ public class GraphingHandler {
 	
 	private double gridSize = 1.0d;
 	private Vector2 offset = new Vector2(0, 0);
-	private double zoom = 1.0d;
+	private double zoom = 10.0d;
+
+	public boolean displayGrid = true;
+	public boolean displayOrigin = true;
 	
 	public GraphingHandler(MathsStill parent) {
 		instance = parent;
@@ -26,7 +30,7 @@ public class GraphingHandler {
 	public void render() {
 		GraphicsContext gc = instance.getGraph();
 		drawGrid(gc);
-		drawFps();
+		drawText();
 	}
 	
 	public void onMouseDrag(MouseEvent e) {
@@ -42,37 +46,58 @@ public class GraphingHandler {
 	
 	public void onMouseScroll(ScrollEvent e) {
 		zoom += e.getDeltaY() * zoom * 0.001d;
-		if (zoom < 2.0d) {
-			zoom = 2.0d;
+		if (zoom < 5.0d) {
+			zoom = 5.0d;
 		}
-		if (zoom > 35.0d) {
-			zoom = 35.0d;
+		if (zoom > 100.0d) {
+			zoom = 100.0d;
+		}
+		if (e.getDeltaY() < 0) {
+			instance.getCursorHandler().setCursor(Cursor.S_RESIZE);
+		} else {
+			instance.getCursorHandler().setCursor(Cursor.N_RESIZE);
 		}
 	}
 	
-	private void drawFps() {
+	private void drawText() {
 		int fps = instance.getRenderLoop().getFps();
 		double x = -RenderHandler.getCanvas().getWidth() / 2 + 10;
 		double y = -RenderHandler.getCanvas().getHeight() / 2 + 10;
-		RenderHandler.drawText(new Vector2(x, y), Color.CORNFLOWERBLUE, "FPS: " + fps);
+		int between = 20;
+		Paint color = Color.BROWN;
+		RenderHandler.drawText(new Vector2(x, y), color, "FPS: " + fps);
+		RenderHandler.drawText(new Vector2(x, y + between), color, "Scale: " + String.format("%02.2f", zoom));
+		RenderHandler.drawText(new Vector2(x, y + between * 2), color, "Grid Spacing: " + String.format("%02.2f", gridSize));
+		RenderHandler.drawText(new Vector2(x, y + between * 3), color, "Offset: " + offset);
+		RenderHandler.drawText(new Vector2(x, y + between * 4), color, "Cursor: " + instance.getCursorHandler().getCurrentCursor());
+		RenderHandler.drawLine(new Vector2(x, y + between * 5 + between / 2), new Vector2(x + 100, y + between * 5 + between / 2), color);
+		RenderHandler.drawText(new Vector2(x, y + between * 6), color, "Draw Grid: " + displayGrid);
+		RenderHandler.drawText(new Vector2(x, y + between * 7), color, "Draw Origin: " + displayOrigin);
 	}
 	
 	private void drawGrid(GraphicsContext gc) {
-		Canvas c = gc.getCanvas();
-		double lineStartY = snap(-c.getHeight() / 2);
-		double lineEndY = snap(c.getHeight() / 2);
-		double lineStartX = snap(-c.getWidth() / 2);
-		double lineEndX = snap(c.getWidth() / 2);
-		for (double x = gridSize; x < c.getWidth() / 2; x += gridSize) {
-			RenderHandler.drawLine(transform(new Vector2(x, lineStartY)), transform(new Vector2(x, lineEndY)), Color.rgb(200, 200, 200));
-			RenderHandler.drawLine(transform(new Vector2(-x, lineStartY)), transform(new Vector2(-x, lineEndY)), Color.rgb(200, 200, 200));
+		if (displayGrid) {
+			Canvas c = gc.getCanvas();
+			double lineStartY = snap(-c.getHeight() / 2);
+			double lineEndY = snap(c.getHeight() / 2);
+			double lineStartX = snap(-c.getWidth() / 2);
+			double lineEndX = snap(c.getWidth() / 2);
+			Paint faint = Color.rgb(200, 200, 200);
+			for (double x = gridSize; x < c.getWidth() / 2; x += gridSize) {
+				RenderHandler.drawLine(transform(new Vector2(x, lineStartY)), transform(new Vector2(x, lineEndY)), faint);
+				RenderHandler.drawLine(transform(new Vector2(-x, lineStartY)), transform(new Vector2(-x, lineEndY)), faint);
+			}
+			for (double y = gridSize; y < c.getHeight() / 2; y += gridSize) {
+				RenderHandler.drawLine(transform(new Vector2(lineStartX, y)), transform(new Vector2(lineEndX, y)), faint);
+				RenderHandler.drawLine(transform(new Vector2(lineStartX, -y)), transform(new Vector2(lineEndX, -y)), faint);
+			}
+			Paint originColor = faint;
+			if (displayOrigin) {
+				originColor = Color.BLACK;
+			}
+			RenderHandler.drawLine(transform(new Vector2(0.0d, -c.getHeight() / 2)), transform(new Vector2(0.0d, c.getHeight() / 2)), originColor);
+			RenderHandler.drawLine(transform(new Vector2(-c.getWidth() / 2, 0.0d)), transform(new Vector2(c.getWidth() / 2, 0.0d)), originColor);
 		}
-		for (double y = gridSize; y < c.getHeight() / 2; y += gridSize) {
-			RenderHandler.drawLine(transform(new Vector2(lineStartX, y)), transform(new Vector2(lineEndX, y)), Color.rgb(200, 200, 200));
-			RenderHandler.drawLine(transform(new Vector2(lineStartX, -y)), transform(new Vector2(lineEndX, -y)), Color.rgb(200, 200, 200));
-		}
-		RenderHandler.drawLine(transform(new Vector2(0.0d, -c.getHeight() / 2)), transform(new Vector2(0.0d, c.getHeight() / 2)), Color.BLACK);
-		RenderHandler.drawLine(transform(new Vector2(-c.getWidth() / 2, 0.0d)), transform(new Vector2(c.getWidth() / 2, 0.0d)), Color.BLACK);
 	}
 	
 	private Vector2 transform(Vector2 in) {

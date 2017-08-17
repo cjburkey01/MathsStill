@@ -39,10 +39,10 @@ public class MathsStill extends Application {
 	}
 	
 	private void render() {
-		cursorHandler.render();
 		windowHandler.onUpdate(renderLoop.getFps());
 		getGraph().translate(getGraph().getCanvas().getWidth() / 2, getGraph().getCanvas().getHeight() / 2);
 		graphingHandler.render();
+		cursorHandler.render();
 		getGraph().translate(-getGraph().getCanvas().getWidth() / 2, -getGraph().getCanvas().getHeight() / 2);
 	}
 	
