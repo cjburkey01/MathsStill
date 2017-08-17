@@ -1,5 +1,6 @@
 package com.cjburkey.mathsstill.graph;
 
+import java.util.Random;
 import com.cjburkey.mathsstill.MathsStill;
 import com.cjburkey.mathsstill.event.MainEventHandler;
 import com.cjburkey.mathsstill.math.Vector2;
@@ -30,7 +31,13 @@ public class GraphingHandler {
 	public void render() {
 		GraphicsContext gc = instance.getGraph();
 		drawGrid(gc);
-		drawText();
+		drawRay(new Vector2(-5, 5), new Vector2(5, 20));
+		drawRay(new Vector2(4, 10), new Vector2(18, -12));
+		drawRay(new Vector2(3, -3), new Vector2(0, 0));
+		drawRay(new Vector2(0, 0), new Vector2(-3, -3));
+		drawRay(new Vector2(0, 0), new Vector2(0, 2));
+		drawRay(new Vector2(-2, 0), new Vector2(0, 0));
+		drawDebugInfo();
 	}
 	
 	public void onMouseDrag(MouseEvent e) {
@@ -46,6 +53,15 @@ public class GraphingHandler {
 	
 	public void onMouseScroll(ScrollEvent e) {
 		zoom += e.getDeltaY() * zoom * 0.001d;
+		if (zoom < 10.0d) {
+			if (zoom <= 5.5d) {
+				gridSize = 4.0d;
+			} else {
+				gridSize = 2.0d;
+			}
+		} else {
+			gridSize = 1.0d;
+		}
 		if (zoom < 5.0d) {
 			zoom = 5.0d;
 		}
@@ -59,20 +75,24 @@ public class GraphingHandler {
 		}
 	}
 	
-	private void drawText() {
+	private void drawDebugInfo() {
 		int fps = instance.getRenderLoop().getFps();
 		double x = -RenderHandler.getCanvas().getWidth() / 2 + 10;
 		double y = -RenderHandler.getCanvas().getHeight() / 2 + 10;
 		int between = 20;
-		Paint color = Color.BROWN;
+		Paint color = Color.BLACK;
 		RenderHandler.drawText(new Vector2(x, y), color, "FPS: " + fps);
 		RenderHandler.drawText(new Vector2(x, y + between), color, "Scale: " + String.format("%02.2f", zoom));
 		RenderHandler.drawText(new Vector2(x, y + between * 2), color, "Grid Spacing: " + String.format("%02.2f", gridSize));
 		RenderHandler.drawText(new Vector2(x, y + between * 3), color, "Offset: " + offset);
 		RenderHandler.drawText(new Vector2(x, y + between * 4), color, "Cursor: " + instance.getCursorHandler().getCurrentCursor());
-		RenderHandler.drawLine(new Vector2(x, y + between * 5 + between / 2), new Vector2(x + 100, y + between * 5 + between / 2), color);
+		RenderHandler.drawLine(new Vector2(x, y + between * 5.5), new Vector2(x + 100, y + between * 5.5), color);
 		RenderHandler.drawText(new Vector2(x, y + between * 6), color, "Draw Grid: " + displayGrid);
 		RenderHandler.drawText(new Vector2(x, y + between * 7), color, "Draw Origin: " + displayOrigin);
+		RenderHandler.drawText(new Vector2(x, y + between * 8), color, "Time: " + System.currentTimeMillis() + " ms");
+		if (fps < 6) {
+			instance.getCursorHandler().setCursor(Cursor.WAIT);
+		}
 	}
 	
 	private void drawGrid(GraphicsContext gc) {
@@ -98,6 +118,14 @@ public class GraphingHandler {
 			RenderHandler.drawLine(transform(new Vector2(0.0d, -c.getHeight() / 2)), transform(new Vector2(0.0d, c.getHeight() / 2)), originColor);
 			RenderHandler.drawLine(transform(new Vector2(-c.getWidth() / 2, 0.0d)), transform(new Vector2(c.getWidth() / 2, 0.0d)), originColor);
 		}
+	}
+	
+	private void drawRay(Vector2 start, Vector2 end) {
+		Vector2 s = new Vector2(start);
+		Vector2 e = new Vector2(end);
+		s.setY(-s.getY());
+		e.setY(-e.getY());
+		RenderHandler.drawLine(transform(s), transform(e), Color.RED);
 	}
 	
 	private Vector2 transform(Vector2 in) {
