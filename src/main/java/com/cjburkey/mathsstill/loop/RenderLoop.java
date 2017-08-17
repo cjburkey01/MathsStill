@@ -12,11 +12,16 @@ public class RenderLoop {
 	private int frames = 0;
 	private int fps = 0;
 	private long lastFpsCheck = System.nanoTime();
+	private boolean firstRun = true;
 	
 	public RenderLoop(Runnable call) {
 		timer = new AnimationTimer() {
 			public void handle(long current) {
 				if (running) {
+					if (firstRun) {
+						firstRun = false;
+						System.out.println("Render loop started.");
+					}
 					frames ++;
 					long now = System.nanoTime();
 					if (now - lastFpsCheck >= 1000000000L) {

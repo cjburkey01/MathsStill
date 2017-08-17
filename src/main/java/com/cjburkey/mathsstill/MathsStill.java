@@ -1,5 +1,6 @@
 package com.cjburkey.mathsstill;
 
+import com.cjburkey.mathsstill.cursor.CursorHandler;
 import com.cjburkey.mathsstill.graph.GraphingHandler;
 import com.cjburkey.mathsstill.graph.RenderHandler;
 import com.cjburkey.mathsstill.loop.RenderLoop;
@@ -15,6 +16,7 @@ public class MathsStill extends Application {
 	private WindowHandler windowHandler;
 	private RenderLoop renderLoop;
 	private GraphingHandler graphingHandler;
+	private CursorHandler cursorHandler;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -24,9 +26,10 @@ public class MathsStill extends Application {
 		System.out.println("Building...");
 		windowHandler = new WindowHandler();
 		renderLoop = new RenderLoop(() -> render());
-		windowHandler.buildMainWindow(stage);
+		windowHandler.buildMainWindow(this, stage);
 		RenderHandler.init(this);
 		graphingHandler = new GraphingHandler(this);
+		cursorHandler = new CursorHandler();
 		System.out.println("Built.");
 		
 		System.out.println("Launching...");
@@ -36,6 +39,7 @@ public class MathsStill extends Application {
 	}
 	
 	private void render() {
+		cursorHandler.render();
 		windowHandler.onUpdate(renderLoop.getFps());
 		getGraph().translate(getGraph().getCanvas().getWidth() / 2, getGraph().getCanvas().getHeight() / 2);
 		graphingHandler.render();
@@ -49,6 +53,18 @@ public class MathsStill extends Application {
 	
 	public GraphicsContext getGraph() {
 		return windowHandler.getGraphingCanvas().getGraphics();
+	}
+	
+	public GraphingHandler getGraphingHandler() {
+		return graphingHandler;
+	}
+	
+	public RenderLoop getRenderLoop() {
+		return renderLoop;
+	}
+	
+	public CursorHandler getCursorHandler() {
+		return cursorHandler;
 	}
 	
 }

@@ -13,7 +13,7 @@ public abstract class Vector {
 		}
 	}
 	
-	public double getMagnitude() {
+	public final double getMagnitude() {
 		double radicant = 0.0d;
 		for (int i = 0; i < size; i ++) {
 			radicant += Math.pow(get(i), 2);
@@ -21,11 +21,28 @@ public abstract class Vector {
 		return Math.sqrt(radicant);
 	}
 	
-	public void normalize() {
+	public final void normalize() {
 		double magnitude = getMagnitude();
 		for (int i = 0; i < size; i ++) {
 			set(i, get(i) / magnitude);
 		}
+	}
+	
+	public final String toString() {
+		StringBuilder out = new StringBuilder();
+		out.append("Vector");
+		out.append(size);
+		out.append(' ');
+		out.append('(');
+		for (int i = 0; i < size; i ++) {
+			out.append(get(i));
+			if (i < size - 1) {
+				out.append(',');
+				out.append(' ');
+			}
+		}
+		out.append(')');
+		return out.toString();
 	}
 	
 	protected final void set(int val, double value) {

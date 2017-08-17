@@ -1,6 +1,5 @@
 package com.cjburkey.mathsstill.window;
 
-import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -12,7 +11,6 @@ public class GraphingCanvas extends Canvas {
 	}
 	
 	public void update() {
-		setCursor(Cursor.CROSSHAIR);
 		getGraphics().clearRect(0, 0, getWidth(), getHeight());
 		getGraphics().setFill(Color.WHITE);
 		getGraphics().fillRect(0, 0, getWidth(), getHeight());
