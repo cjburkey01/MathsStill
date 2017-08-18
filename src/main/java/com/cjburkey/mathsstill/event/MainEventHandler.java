@@ -9,13 +9,14 @@ public class MainEventHandler {
 	
 	public static MainEventHandler self;
 	
-	public Vector2 mousePos = new Vector2();
+	private Vector2 mousePos = new Vector2();
 	
 	private MathsStill instance;
 	
 	public MainEventHandler(MathsStill instance) {
 		self = this;
 		this.instance = instance;
+		mousePos = new Vector2(250, 250);
 	}
 	
 	public void onMouseMove(MouseEvent e) {
@@ -38,6 +39,10 @@ public class MainEventHandler {
 	private void setPos(MouseEvent e) {
 		mousePos.setX(e.getX());
 		mousePos.setY(e.getY());
+	}
+	
+	public Vector2 getMousePos() {
+		return new Vector2(mousePos);
 	}
 	
 }

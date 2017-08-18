@@ -1,6 +1,6 @@
 package com.cjburkey.mathsstill.cursor;
 
-import com.cjburkey.mathsstill.graph.RenderHandler;
+import com.cjburkey.mathsstill.MathsStill;
 import javafx.scene.Cursor;
 
 public class CursorHandler {
@@ -23,7 +23,7 @@ public class CursorHandler {
 	
 	public void render() {
 		if (currentCursor != null) {
-			RenderHandler.getCanvas().setCursor(currentCursor);
+			MathsStill.graphingRender.getCanvas().setCursor(currentCursor);
 		}
 		setCursor(Cursor.CROSSHAIR);
 	}

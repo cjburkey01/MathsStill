@@ -1,11 +1,11 @@
 package com.cjburkey.mathsstill.graph;
 
-import java.util.Random;
+import com.cjburkey.mathsstill.MathUtils;
 import com.cjburkey.mathsstill.MathsStill;
 import com.cjburkey.mathsstill.event.MainEventHandler;
 import com.cjburkey.mathsstill.math.Vector2;
+import com.cjburkey.mathsstill.render.RenderHandler;
 import javafx.scene.Cursor;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -20,7 +20,7 @@ public class GraphingHandler {
 	private double gridSize = 1.0d;
 	private Vector2 offset = new Vector2(0, 0);
 	private double zoom = 10.0d;
-
+	
 	public boolean displayGrid = true;
 	public boolean displayOrigin = true;
 	
@@ -29,20 +29,14 @@ public class GraphingHandler {
 	}
 	
 	public void render() {
-		GraphicsContext gc = instance.getGraph();
+		GraphicsContext gc = MathsStill.graphingRender.getGraphics();
 		drawGrid(gc);
-		drawRay(new Vector2(-5, 5), new Vector2(5, 20));
-		drawRay(new Vector2(4, 10), new Vector2(18, -12));
-		drawRay(new Vector2(3, -3), new Vector2(0, 0));
-		drawRay(new Vector2(0, 0), new Vector2(-3, -3));
-		drawRay(new Vector2(0, 0), new Vector2(0, 2));
-		drawRay(new Vector2(-2, 0), new Vector2(0, 0));
 		drawDebugInfo();
 	}
 	
 	public void onMouseDrag(MouseEvent e) {
 		if (e != null && e.getButton() != null && (e.getButton().equals(MouseButton.MIDDLE) || e.getButton().equals(MouseButton.PRIMARY))) {
-			Vector2 mouse = MainEventHandler.self.mousePos;
+			Vector2 mouse = MainEventHandler.self.getMousePos();
 			Vector2 diff = new Vector2(e.getX(), e.getY());
 			diff.sub(mouse);
 			diff.div(zoom);
@@ -76,20 +70,25 @@ public class GraphingHandler {
 	}
 	
 	private void drawDebugInfo() {
+		Vector2 mouseScreenCoords = MainEventHandler.self.getMousePos();
+		mouseScreenCoords.sub(MathsStill.graphingRender.getHalfSize());
+		Vector2 mouseGraphCoords = screenCoordsToGraph(mouseScreenCoords);
+		//drawSegment(new Vector2(0.0d, 0.0d), mouseGraphCoords);
+		mouseScreenCoords.add(new Vector2(10.0d, 10.0d));
+		
 		int fps = instance.getRenderLoop().getFps();
-		double x = -RenderHandler.getCanvas().getWidth() / 2 + 10;
-		double y = -RenderHandler.getCanvas().getHeight() / 2 + 10;
+		double x = -MathsStill.graphingRender.getCanvas().getWidth() / 2 + 10;
+		double y = -MathsStill.graphingRender.getCanvas().getHeight() / 2 + 10;
 		int between = 20;
 		Paint color = Color.BLACK;
-		RenderHandler.drawText(new Vector2(x, y), color, "FPS: " + fps);
-		RenderHandler.drawText(new Vector2(x, y + between), color, "Scale: " + String.format("%02.2f", zoom));
-		RenderHandler.drawText(new Vector2(x, y + between * 2), color, "Grid Spacing: " + String.format("%02.2f", gridSize));
-		RenderHandler.drawText(new Vector2(x, y + between * 3), color, "Offset: " + offset);
-		RenderHandler.drawText(new Vector2(x, y + between * 4), color, "Cursor: " + instance.getCursorHandler().getCurrentCursor());
-		RenderHandler.drawLine(new Vector2(x, y + between * 5.5), new Vector2(x + 100, y + between * 5.5), color);
-		RenderHandler.drawText(new Vector2(x, y + between * 6), color, "Draw Grid: " + displayGrid);
-		RenderHandler.drawText(new Vector2(x, y + between * 7), color, "Draw Origin: " + displayOrigin);
-		RenderHandler.drawText(new Vector2(x, y + between * 8), color, "Time: " + System.currentTimeMillis() + " ms");
+		MathsStill.graphingRender.drawText(new Vector2(x, y), color, "FPS: " + fps);
+		MathsStill.graphingRender.drawText(new Vector2(x, y + between), color, "Scale: " + String.format("%02.2f", zoom));
+		MathsStill.graphingRender.drawText(new Vector2(x, y + between * 2), color, "Grid Spacing: " + String.format("%02.2f", gridSize));
+		MathsStill.graphingRender.drawText(new Vector2(x, y + between * 3), color, "Cursor: " + instance.getCursorHandler().getCurrentCursor());
+		MathsStill.graphingRender.drawLine(new Vector2(x, y + between * 4.5), new Vector2(x + 100, y + between * 4.5), color);
+		MathsStill.graphingRender.drawText(new Vector2(x, y + between * 5), color, "Grid: " + displayGrid);
+		MathsStill.graphingRender.drawText(new Vector2(x + 20, y + between * 6), color, "Origin: " + displayOrigin);
+		MathsStill.graphingRender.drawText(mouseScreenCoords, color, mouseGraphCoords);
 		if (fps < 6) {
 			instance.getCursorHandler().setCursor(Cursor.WAIT);
 		}
@@ -97,38 +96,59 @@ public class GraphingHandler {
 	
 	private void drawGrid(GraphicsContext gc) {
 		if (displayGrid) {
-			Canvas c = gc.getCanvas();
-			double lineStartY = snap(-c.getHeight() / 2);
-			double lineEndY = snap(c.getHeight() / 2);
-			double lineStartX = snap(-c.getWidth() / 2);
-			double lineEndX = snap(c.getWidth() / 2);
-			Paint faint = Color.rgb(200, 200, 200);
-			for (double x = gridSize; x < c.getWidth() / 2; x += gridSize) {
-				RenderHandler.drawLine(transform(new Vector2(x, lineStartY)), transform(new Vector2(x, lineEndY)), faint);
-				RenderHandler.drawLine(transform(new Vector2(-x, lineStartY)), transform(new Vector2(-x, lineEndY)), faint);
+			RenderHandler rh = MathsStill.graphingRender;
+			Color mainColor = Color.rgb(200, 200, 200);
+			Color boldColor = Color.BLACK;
+
+			double lineStartY = (-rh.getSize().getY() / 2) / zoom;
+			double lineEndY = (rh.getSize().getY()/ 2) / zoom;
+			double lineStartX = (-rh.getSize().getX() / 2) / zoom;
+			double lineEndX = (rh.getSize().getX() / 2) / zoom;
+			
+			for (double x = 0.0d; x < rh.getHalfSize().getX() / zoom; x += gridSize) {
+				double xx = MathUtils.round(x - offset.getX(), gridSize);
+				double xxx = MathUtils.round(x + offset.getX(), gridSize);
+				double lsY = MathUtils.round(lineStartY - offset.getY(), gridSize);
+				double leY = MathUtils.round(lineEndY - offset.getY(), gridSize);
+				rh.drawLine(renderCoords(new Vector2(xx, lsY)), renderCoords(new Vector2(xx, leY)), mainColor);
+				if (x != 0) {
+					rh.drawLine(renderCoords(new Vector2(-xxx, lsY)), renderCoords(new Vector2(-xxx, leY)), mainColor);
+				}
 			}
-			for (double y = gridSize; y < c.getHeight() / 2; y += gridSize) {
-				RenderHandler.drawLine(transform(new Vector2(lineStartX, y)), transform(new Vector2(lineEndX, y)), faint);
-				RenderHandler.drawLine(transform(new Vector2(lineStartX, -y)), transform(new Vector2(lineEndX, -y)), faint);
+			for (double y = 0.0d; y < rh.getHalfSize().getY() / zoom; y += gridSize) {
+				double yy = MathUtils.round(y - offset.getY(), gridSize);
+				double yyy = MathUtils.round(y + offset.getY(), gridSize);
+				double lsX = MathUtils.round(lineStartX - offset.getX(), gridSize);
+				double leX = MathUtils.round(lineEndX - offset.getX(), gridSize);
+				rh.drawLine(renderCoords(new Vector2(lsX, yy)), renderCoords(new Vector2(leX, yy)), mainColor);
+				if (y != 0) {
+					rh.drawLine(renderCoords(new Vector2(lsX, -yyy)), renderCoords(new Vector2(leX, -yyy)), mainColor);
+				}
 			}
-			Paint originColor = faint;
 			if (displayOrigin) {
-				originColor = Color.BLACK;
+				MathsStill.graphingRender.drawLine(renderCoords(new Vector2(0.0d, -100)), renderCoords(new Vector2(0.0d, 100)), boldColor);
+				MathsStill.graphingRender.drawLine(renderCoords(new Vector2(-100, 0.0d)), renderCoords(new Vector2(100, 0.0d)), boldColor);
 			}
-			RenderHandler.drawLine(transform(new Vector2(0.0d, -c.getHeight() / 2)), transform(new Vector2(0.0d, c.getHeight() / 2)), originColor);
-			RenderHandler.drawLine(transform(new Vector2(-c.getWidth() / 2, 0.0d)), transform(new Vector2(c.getWidth() / 2, 0.0d)), originColor);
 		}
 	}
 	
-	private void drawRay(Vector2 start, Vector2 end) {
+	public Vector2 screenCoordsToGraph(Vector2 in) {
+		Vector2 out = new Vector2(in);
+		out.div(zoom);
+		out.sub(offset);
+		out.setY(-out.getY());
+		return out;
+	}
+	
+	public void drawSegment(Vector2 start, Vector2 end) {
 		Vector2 s = new Vector2(start);
 		Vector2 e = new Vector2(end);
 		s.setY(-s.getY());
 		e.setY(-e.getY());
-		RenderHandler.drawLine(transform(s), transform(e), Color.RED);
+		MathsStill.graphingRender.drawLine(renderCoords(s), renderCoords(e), Color.RED);
 	}
 	
-	private Vector2 transform(Vector2 in) {
+	private Vector2 renderCoords(Vector2 in) {
 		return snap(transformCoords(in));
 	}
 	

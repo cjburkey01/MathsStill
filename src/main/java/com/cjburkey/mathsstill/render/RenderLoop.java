@@ -1,4 +1,4 @@
-package com.cjburkey.mathsstill.loop;
+package com.cjburkey.mathsstill.render;
 
 import javafx.animation.AnimationTimer;
 import javafx.concurrent.Task;

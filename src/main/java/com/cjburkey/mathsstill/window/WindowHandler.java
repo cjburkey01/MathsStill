@@ -11,8 +11,6 @@ import javafx.stage.Stage;
 
 public class WindowHandler {
 	
-	private int lastFps = 0;
-	
 	private MainEventHandler eventHandler;
 	
 	private Stage mainStage;
@@ -57,10 +55,6 @@ public class WindowHandler {
 	}
 	
 	public void onUpdate(int fps) {
-		if (fps != lastFps) {
-			System.out.println("FPS changed to: " + fps);
-			lastFps = fps;
-		}
 		if (mainCanvas != null) {
 			mainCanvas.update();
 		}
