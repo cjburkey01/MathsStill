@@ -30,9 +30,6 @@ public abstract class Vector {
 	
 	public final String toString() {
 		StringBuilder out = new StringBuilder();
-		out.append("Vector");
-		out.append(size);
-		out.append(' ');
 		out.append('(');
 		for (int i = 0; i < size; i ++) {
 			out.append(String.format("%02.2f", get(i)));
@@ -43,6 +40,13 @@ public abstract class Vector {
 		}
 		out.append(')');
 		return out.toString();
+	}
+	
+	public final void set(Vector other) {
+		int max = Math.min(other.size, size);
+		for (int i = 0; i < max; i ++) {
+			set(i, other.get(i));
+		}
 	}
 	
 	protected final void set(int val, double value) {

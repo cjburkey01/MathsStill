@@ -1,6 +1,10 @@
 package com.cjburkey.mathsstill.math;
 
 public final class Vector2 extends Vector {
+	
+	public static Vector2 EMPTY() {
+		return new Vector2();
+	}
 
 	public Vector2() {
 		super(2);
@@ -13,9 +17,7 @@ public final class Vector2 extends Vector {
 	}
 	
 	public Vector2(Vector2 copy) {
-		this();
-		setX(copy.getX());
-		setY(copy.getY());
+		this(copy.getX(), copy.getY());
 	}
 	
 	public void setX(double val) {
