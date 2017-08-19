@@ -12,6 +12,7 @@ public class MathsStill extends Application {
 	
 	public static final String version = "0.0.1";
 	public static final RenderHandler graphingRender = new RenderHandler();
+	public static final RenderHandler graphingGuiRender = new RenderHandler();
 
 	private WindowHandler windowHandler;
 	private RenderLoop renderLoop;
@@ -28,6 +29,7 @@ public class MathsStill extends Application {
 		renderLoop = new RenderLoop(() -> render());
 		windowHandler.buildMainWindow(this, stage);
 		graphingRender.init(windowHandler.getGraphingCanvas());
+		graphingGuiRender.init(windowHandler.getGraphingCanvas());
 		graphingHandler = new GraphingHandler(this);
 		cursorHandler = new CursorHandler();
 		System.out.println("Built.");
@@ -40,10 +42,10 @@ public class MathsStill extends Application {
 	
 	private void render() {
 		windowHandler.onUpdate(renderLoop.getFps());
-		graphingRender.getGraphics().translate(graphingRender.getGraphics().getCanvas().getWidth() / 2, graphingRender.getGraphics().getCanvas().getHeight() / 2);
+		graphingRender.centerGraphics();
 		graphingHandler.render();
 		cursorHandler.render();
-		graphingRender.getGraphics().translate(-graphingRender.getGraphics().getCanvas().getWidth() / 2, -graphingRender.getGraphics().getCanvas().getHeight() / 2);
+		graphingRender.topLeftGraphics();
 	}
 	
 	public void exit() {

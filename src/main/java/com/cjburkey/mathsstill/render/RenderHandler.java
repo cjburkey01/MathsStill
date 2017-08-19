@@ -70,6 +70,14 @@ public class RenderHandler {
 		return canvas.getGraphicsContext2D();
 	}
 	
+	public void centerGraphics() {
+		getGraphics().translate(canvas.getWidth() / 2, canvas.getHeight() / 2);
+	}
+	
+	public void topLeftGraphics() {
+		getGraphics().translate(-canvas.getWidth() / 2, -canvas.getHeight() / 2);
+	}
+	
 	public void drawLine(Vector2 start, Vector2 end, Paint stroke) {
 		getGraphics().setStroke(stroke);
 		getGraphics().strokeLine(start.getX(), start.getY(), end.getX(), end.getY());

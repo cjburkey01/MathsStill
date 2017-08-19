@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 
 public class ElementLine implements IRenderElement {
 	
-	private boolean shown = false;
+	private boolean shown = true;
 	private final Vector2 start;
 	private final Vector2 end;
 	private Color color;
@@ -25,20 +25,20 @@ public class ElementLine implements IRenderElement {
 	public void init() {
 	}
 	
-	public void show() {
-		shown = true;
-	}
-	
-	public void hide() {
-		shown = false;
-	}
-	
 	public void render(RenderHandler renderer, Transform transform) {
 		renderer.drawLine(transform.transform(start), transform.transform(end), color);
 	}
 	
 	public boolean isShown() {
 		return shown;
+	}
+	
+	public void show() {
+		shown = true;
+	}
+	
+	public void hide() {
+		shown = false;
 	}
 	
 	public void setStart(Vector2 start) {
