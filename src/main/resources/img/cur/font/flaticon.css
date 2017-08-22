@@ -1,0 +1,106 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 22/06/2016 15:12
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}
+
+.flaticon-add-icon:before { content: "\f100"; }
+.flaticon-arrow-pointer:before { content: "\f101"; }
+.flaticon-arrow-pointer-1:before { content: "\f102"; }
+.flaticon-arrow-pointer-2:before { content: "\f103"; }
+.flaticon-arrows-move-tool:before { content: "\f104"; }
+.flaticon-binoculars-tool:before { content: "\f105"; }
+.flaticon-broken-link:before { content: "\f106"; }
+.flaticon-broken-link-1:before { content: "\f107"; }
+.flaticon-camera-flash:before { content: "\f108"; }
+.flaticon-chain-links:before { content: "\f109"; }
+.flaticon-clenched-fist:before { content: "\f10a"; }
+.flaticon-click-gesture:before { content: "\f10b"; }
+.flaticon-click-gesture-1:before { content: "\f10c"; }
+.flaticon-clicking-cursor:before { content: "\f10d"; }
+.flaticon-clothing-tag:before { content: "\f10e"; }
+.flaticon-cutter-cursor:before { content: "\f10f"; }
+.flaticon-delete-cross:before { content: "\f110"; }
+.flaticon-door-key:before { content: "\f111"; }
+.flaticon-door-key-1:before { content: "\f112"; }
+.flaticon-edit-tool:before { content: "\f113"; }
+.flaticon-entering-password:before { content: "\f114"; }
+.flaticon-eye-close-up:before { content: "\f115"; }
+.flaticon-forbidden-sign:before { content: "\f116"; }
+.flaticon-garbage-bin:before { content: "\f117"; }
+.flaticon-hand-cursor:before { content: "\f118"; }
+.flaticon-hand-cursor-1:before { content: "\f119"; }
+.flaticon-hand-cursor-2:before { content: "\f11a"; }
+.flaticon-human-skull:before { content: "\f11b"; }
+.flaticon-human-skull-1:before { content: "\f11c"; }
+.flaticon-index-finger-cursor:before { content: "\f11d"; }
+.flaticon-keyhole:before { content: "\f11e"; }
+.flaticon-keyhole-1:before { content: "\f11f"; }
+.flaticon-left-and-right-arrow:before { content: "\f120"; }
+.flaticon-lightning-electric-energy:before { content: "\f121"; }
+.flaticon-link:before { content: "\f122"; }
+.flaticon-link-1:before { content: "\f123"; }
+.flaticon-locked-padlock:before { content: "\f124"; }
+.flaticon-locked-padlock-1:before { content: "\f125"; }
+.flaticon-locked-padlock-2:before { content: "\f126"; }
+.flaticon-magnifying-glass-cursor:before { content: "\f127"; }
+.flaticon-map-pin:before { content: "\f128"; }
+.flaticon-paper-clip:before { content: "\f129"; }
+.flaticon-paper-clip-1:before { content: "\f12a"; }
+.flaticon-pen-cursor:before { content: "\f12b"; }
+.flaticon-pen-tool:before { content: "\f12c"; }
+.flaticon-pen-tool-1:before { content: "\f12d"; }
+.flaticon-pen-tool-2:before { content: "\f12e"; }
+.flaticon-pencil-cursor:before { content: "\f12f"; }
+.flaticon-pencil-cursor-1:before { content: "\f130"; }
+.flaticon-pencil-cursor-2:before { content: "\f131"; }
+.flaticon-pencil-tool:before { content: "\f132"; }
+.flaticon-pencil-tool-1:before { content: "\f133"; }
+.flaticon-plain-microphone:before { content: "\f134"; }
+.flaticon-quill-and-ink:before { content: "\f135"; }
+.flaticon-rubbish-bin:before { content: "\f136"; }
+.flaticon-sand-clock-cursor:before { content: "\f137"; }
+.flaticon-scissors-cursor:before { content: "\f138"; }
+.flaticon-scissors-tool:before { content: "\f139"; }
+.flaticon-shiny-eye:before { content: "\f13a"; }
+.flaticon-test-box:before { content: "\f13b"; }
+.flaticon-text-entry-box:before { content: "\f13c"; }
+.flaticon-two-pointers:before { content: "\f13d"; }
+.flaticon-unlocked-padlock:before { content: "\f13e"; }
+.flaticon-unlocked-padlock-1:before { content: "\f13f"; }
+.flaticon-up-and-left-arrow:before { content: "\f140"; }
+.flaticon-update-arrow:before { content: "\f141"; }
+.flaticon-vertical-and-horizontal-arrows:before { content: "\f142"; }
+.flaticon-vertical-arrows:before { content: "\f143"; }
+.flaticon-visibility-off:before { content: "\f144"; }
+.flaticon-weapon-crosshair:before { content: "\f145"; }
+.flaticon-weapon-crosshair-1:before { content: "\f146"; }
+.flaticon-weapon-crosshair-2:before { content: "\f147"; }
+.flaticon-zoom-in-cursor:before { content: "\f148"; }
+.flaticon-zoom-in-tool:before { content: "\f149"; }
+.flaticon-zoom-out-tool:before { content: "\f14a"; }

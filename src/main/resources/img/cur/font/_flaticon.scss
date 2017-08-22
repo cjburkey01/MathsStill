@@ -1,0 +1,189 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 22/06/2016 15:12
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-add-icon:before { content: "\f100"; }
+.flaticon-arrow-pointer:before { content: "\f101"; }
+.flaticon-arrow-pointer-1:before { content: "\f102"; }
+.flaticon-arrow-pointer-2:before { content: "\f103"; }
+.flaticon-arrows-move-tool:before { content: "\f104"; }
+.flaticon-binoculars-tool:before { content: "\f105"; }
+.flaticon-broken-link:before { content: "\f106"; }
+.flaticon-broken-link-1:before { content: "\f107"; }
+.flaticon-camera-flash:before { content: "\f108"; }
+.flaticon-chain-links:before { content: "\f109"; }
+.flaticon-clenched-fist:before { content: "\f10a"; }
+.flaticon-click-gesture:before { content: "\f10b"; }
+.flaticon-click-gesture-1:before { content: "\f10c"; }
+.flaticon-clicking-cursor:before { content: "\f10d"; }
+.flaticon-clothing-tag:before { content: "\f10e"; }
+.flaticon-cutter-cursor:before { content: "\f10f"; }
+.flaticon-delete-cross:before { content: "\f110"; }
+.flaticon-door-key:before { content: "\f111"; }
+.flaticon-door-key-1:before { content: "\f112"; }
+.flaticon-edit-tool:before { content: "\f113"; }
+.flaticon-entering-password:before { content: "\f114"; }
+.flaticon-eye-close-up:before { content: "\f115"; }
+.flaticon-forbidden-sign:before { content: "\f116"; }
+.flaticon-garbage-bin:before { content: "\f117"; }
+.flaticon-hand-cursor:before { content: "\f118"; }
+.flaticon-hand-cursor-1:before { content: "\f119"; }
+.flaticon-hand-cursor-2:before { content: "\f11a"; }
+.flaticon-human-skull:before { content: "\f11b"; }
+.flaticon-human-skull-1:before { content: "\f11c"; }
+.flaticon-index-finger-cursor:before { content: "\f11d"; }
+.flaticon-keyhole:before { content: "\f11e"; }
+.flaticon-keyhole-1:before { content: "\f11f"; }
+.flaticon-left-and-right-arrow:before { content: "\f120"; }
+.flaticon-lightning-electric-energy:before { content: "\f121"; }
+.flaticon-link:before { content: "\f122"; }
+.flaticon-link-1:before { content: "\f123"; }
+.flaticon-locked-padlock:before { content: "\f124"; }
+.flaticon-locked-padlock-1:before { content: "\f125"; }
+.flaticon-locked-padlock-2:before { content: "\f126"; }
+.flaticon-magnifying-glass-cursor:before { content: "\f127"; }
+.flaticon-map-pin:before { content: "\f128"; }
+.flaticon-paper-clip:before { content: "\f129"; }
+.flaticon-paper-clip-1:before { content: "\f12a"; }
+.flaticon-pen-cursor:before { content: "\f12b"; }
+.flaticon-pen-tool:before { content: "\f12c"; }
+.flaticon-pen-tool-1:before { content: "\f12d"; }
+.flaticon-pen-tool-2:before { content: "\f12e"; }
+.flaticon-pencil-cursor:before { content: "\f12f"; }
+.flaticon-pencil-cursor-1:before { content: "\f130"; }
+.flaticon-pencil-cursor-2:before { content: "\f131"; }
+.flaticon-pencil-tool:before { content: "\f132"; }
+.flaticon-pencil-tool-1:before { content: "\f133"; }
+.flaticon-plain-microphone:before { content: "\f134"; }
+.flaticon-quill-and-ink:before { content: "\f135"; }
+.flaticon-rubbish-bin:before { content: "\f136"; }
+.flaticon-sand-clock-cursor:before { content: "\f137"; }
+.flaticon-scissors-cursor:before { content: "\f138"; }
+.flaticon-scissors-tool:before { content: "\f139"; }
+.flaticon-shiny-eye:before { content: "\f13a"; }
+.flaticon-test-box:before { content: "\f13b"; }
+.flaticon-text-entry-box:before { content: "\f13c"; }
+.flaticon-two-pointers:before { content: "\f13d"; }
+.flaticon-unlocked-padlock:before { content: "\f13e"; }
+.flaticon-unlocked-padlock-1:before { content: "\f13f"; }
+.flaticon-up-and-left-arrow:before { content: "\f140"; }
+.flaticon-update-arrow:before { content: "\f141"; }
+.flaticon-vertical-and-horizontal-arrows:before { content: "\f142"; }
+.flaticon-vertical-arrows:before { content: "\f143"; }
+.flaticon-visibility-off:before { content: "\f144"; }
+.flaticon-weapon-crosshair:before { content: "\f145"; }
+.flaticon-weapon-crosshair-1:before { content: "\f146"; }
+.flaticon-weapon-crosshair-2:before { content: "\f147"; }
+.flaticon-zoom-in-cursor:before { content: "\f148"; }
+.flaticon-zoom-in-tool:before { content: "\f149"; }
+.flaticon-zoom-out-tool:before { content: "\f14a"; }
+    
+    $font-Flaticon-add-icon: "\f100";
+    $font-Flaticon-arrow-pointer: "\f101";
+    $font-Flaticon-arrow-pointer-1: "\f102";
+    $font-Flaticon-arrow-pointer-2: "\f103";
+    $font-Flaticon-arrows-move-tool: "\f104";
+    $font-Flaticon-binoculars-tool: "\f105";
+    $font-Flaticon-broken-link: "\f106";
+    $font-Flaticon-broken-link-1: "\f107";
+    $font-Flaticon-camera-flash: "\f108";
+    $font-Flaticon-chain-links: "\f109";
+    $font-Flaticon-clenched-fist: "\f10a";
+    $font-Flaticon-click-gesture: "\f10b";
+    $font-Flaticon-click-gesture-1: "\f10c";
+    $font-Flaticon-clicking-cursor: "\f10d";
+    $font-Flaticon-clothing-tag: "\f10e";
+    $font-Flaticon-cutter-cursor: "\f10f";
+    $font-Flaticon-delete-cross: "\f110";
+    $font-Flaticon-door-key: "\f111";
+    $font-Flaticon-door-key-1: "\f112";
+    $font-Flaticon-edit-tool: "\f113";
+    $font-Flaticon-entering-password: "\f114";
+    $font-Flaticon-eye-close-up: "\f115";
+    $font-Flaticon-forbidden-sign: "\f116";
+    $font-Flaticon-garbage-bin: "\f117";
+    $font-Flaticon-hand-cursor: "\f118";
+    $font-Flaticon-hand-cursor-1: "\f119";
+    $font-Flaticon-hand-cursor-2: "\f11a";
+    $font-Flaticon-human-skull: "\f11b";
+    $font-Flaticon-human-skull-1: "\f11c";
+    $font-Flaticon-index-finger-cursor: "\f11d";
+    $font-Flaticon-keyhole: "\f11e";
+    $font-Flaticon-keyhole-1: "\f11f";
+    $font-Flaticon-left-and-right-arrow: "\f120";
+    $font-Flaticon-lightning-electric-energy: "\f121";
+    $font-Flaticon-link: "\f122";
+    $font-Flaticon-link-1: "\f123";
+    $font-Flaticon-locked-padlock: "\f124";
+    $font-Flaticon-locked-padlock-1: "\f125";
+    $font-Flaticon-locked-padlock-2: "\f126";
+    $font-Flaticon-magnifying-glass-cursor: "\f127";
+    $font-Flaticon-map-pin: "\f128";
+    $font-Flaticon-paper-clip: "\f129";
+    $font-Flaticon-paper-clip-1: "\f12a";
+    $font-Flaticon-pen-cursor: "\f12b";
+    $font-Flaticon-pen-tool: "\f12c";
+    $font-Flaticon-pen-tool-1: "\f12d";
+    $font-Flaticon-pen-tool-2: "\f12e";
+    $font-Flaticon-pencil-cursor: "\f12f";
+    $font-Flaticon-pencil-cursor-1: "\f130";
+    $font-Flaticon-pencil-cursor-2: "\f131";
+    $font-Flaticon-pencil-tool: "\f132";
+    $font-Flaticon-pencil-tool-1: "\f133";
+    $font-Flaticon-plain-microphone: "\f134";
+    $font-Flaticon-quill-and-ink: "\f135";
+    $font-Flaticon-rubbish-bin: "\f136";
+    $font-Flaticon-sand-clock-cursor: "\f137";
+    $font-Flaticon-scissors-cursor: "\f138";
+    $font-Flaticon-scissors-tool: "\f139";
+    $font-Flaticon-shiny-eye: "\f13a";
+    $font-Flaticon-test-box: "\f13b";
+    $font-Flaticon-text-entry-box: "\f13c";
+    $font-Flaticon-two-pointers: "\f13d";
+    $font-Flaticon-unlocked-padlock: "\f13e";
+    $font-Flaticon-unlocked-padlock-1: "\f13f";
+    $font-Flaticon-up-and-left-arrow: "\f140";
+    $font-Flaticon-update-arrow: "\f141";
+    $font-Flaticon-vertical-and-horizontal-arrows: "\f142";
+    $font-Flaticon-vertical-arrows: "\f143";
+    $font-Flaticon-visibility-off: "\f144";
+    $font-Flaticon-weapon-crosshair: "\f145";
+    $font-Flaticon-weapon-crosshair-1: "\f146";
+    $font-Flaticon-weapon-crosshair-2: "\f147";
+    $font-Flaticon-zoom-in-cursor: "\f148";
+    $font-Flaticon-zoom-in-tool: "\f149";
+    $font-Flaticon-zoom-out-tool: "\f14a";
